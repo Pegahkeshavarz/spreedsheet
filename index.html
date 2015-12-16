@@ -50,28 +50,23 @@ button {
 
 <button id="add-row">Add a Row</button>
 <button id="add-column">Add a Column</button>
-<button id="delete-row">Delete a Row</button>
+
 
 <script>
 
 var buttonRow = document.querySelector('#add-row');
 var buttonColumn = document.querySelector('#add-column');
-var btnDeleteRow = document.querySelector('#delete-row');
+
 
 
 buttonRow.addEventListener('click', addRow);
 buttonColumn.addEventListener('click', addColumn);
-btnDeleteRow.addEventListener('click', deleteRow);
+
 
 var columns = document.querySelectorAll('td').length / document.querySelectorAll('td:last-child').length;
 var rows = document.querySelectorAll('td:last-child').length;
 
 
-function deleteRow(event){
-event.preventDefault();
-delete addRow();
-
-}
 //adding a row
 function addRow(event){
   event.preventDefault();
