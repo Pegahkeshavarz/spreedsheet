@@ -1,0 +1,118 @@
+<style>
+body {
+  font-family: sans-serif;
+  margin: 2em 4em;
+}
+table {
+  margin-bottom: 1em;
+}
+td {
+  border: 1px solid #ccc;
+  padding: 1em;
+}
+button {
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-bottom-width: 2px;
+  border-radius: 5px; font-size: inherit;
+  color: white;
+  background-color: #049cd8;
+  padding: .5em 1em;
+  cursor: pointer;
+}
+</style>
+
+<h1>Spreadsheet</h1>
+
+<table>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td contenteditable>Avand</td>
+      <td contenteditable>Instructor</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td contenteditable>Sandi</td>
+      <td contenteditable>TA</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td contenteditable>Yana</td>
+      <td contenteditable>Student</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td contenteditable>Maks</td>
+      <td contenteditable>Student</td>
+    </tr>
+  </tbody>
+</table>
+
+<button id="add-row">Add a Row</button>
+<button id="add-column">Add a Column</button>
+<button id="delete-row">Delete a Row</button>
+
+<script>
+
+var buttonRow = document.querySelector('#add-row');
+var buttonColumn = document.querySelector('#add-column');
+var btnDeleteRow = document.querySelector('#delete-row');
+
+
+buttonRow.addEventListener('click', addRow);
+buttonColumn.addEventListener('click', addColumn);
+btnDeleteRow.addEventListener('click', deleteRow);
+
+var columns = document.querySelectorAll('td').length / document.querySelectorAll('td:last-child').length;
+var rows = document.querySelectorAll('td:last-child').length;
+
+
+function deleteRow(event){
+event.preventDefault();
+delete addRow();
+
+}
+//adding a row
+function addRow(event){
+  event.preventDefault();
+
+ //create a row
+ var newRow = document.createElement('tr');
+ var tbody = document.querySelector('tbody');
+ tbody.appendChild(newRow);
+
+//create a Td as many as columns
+ for (var i = 0; i < columns; i++) {
+  //create a td}
+   var newTd = document.createElement('td');
+   newRow.appendChild(newTd);
+//if it is first cell give it a content else make it editable
+   if (i==0){
+     newTd.textContent = document.querySelectorAll('td:last-child').length;
+   } else {
+     newTd.setAttribute('contenteditable', true);
+   }
+ }
+ //increment rows
+  rows++;
+}
+
+//adding columns
+function addColumn(event){
+  event.preventDefault();
+
+//get all the rows
+var tr = document.querySelectorAll('tr');
+//loop through each row
+for (var i = 0; i < tr.length; i++) {
+  //create td
+  var td = document.createElement('td');
+  //append it to the row
+  tr[i].appendChild(td);
+  td.setAttribute('contenteditable', true);
+ }
+columns++
+}
+
+
+</script>
